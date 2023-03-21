@@ -1,0 +1,40 @@
+body{
+   text-align: center;
+   
+}
+
+h1{
+  margin-bottom: 130px;
+  color: #322a0e;
+}
+.timeDate, .timerrr{
+  border: 2px solid rgb(194, 93, 29);
+  margin-left: 350px;
+  background-color: rgb(234, 153, 54);
+  width: 50%;
+  
+}
+.timeDate:hover, .timerrr:hover{
+  background-color: rgb(230, 192, 52);
+}
+.timerrr{
+  padding: 20px 0 20px 0px;
+}
+label{
+  font-size: 20px;
+}
+input{
+  border: 1px solid black;
+  padding: 8px;
+
+}
+#start, #stop, #reset{
+  border: 1px solid black;
+  padding: 5px 25px;
+  border-radius: 5px;
+  background-color: rgb(251, 223, 100);
+}
+#start:hover, #stop:hover, #reset:hover{
+  background-color: #f9a640;
+}
+

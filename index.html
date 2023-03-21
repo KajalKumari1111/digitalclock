@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Digital Clock</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="script.js"></script>
+
+  </head>
+  <body onload="startClock()">
+    <h1 class="heading">Digital Clock</h1>
+
+  
+    <div class="datetime">
+      <div class="timeDate">
+      <div class="time">
+        <h2><span id="hour">00</span>:
+        <span id="minutes">00</span>:
+        <span id="seconds">00</span>
+        <span id="period">AM</span></h2>
+      </div>
+
+        <div class="date">
+          <p><span id="dayname">Day</span>/<span id="month">Month</span>-<span id="daynum">00</span>/<span id="year">Year</span></p>
+        </div>
+      </div>
+
+    <div class="timerrr">
+      <div class="second">
+        <label for="time">Enter time in seconds:</label><br><br>
+        <input type="number" id="time" name="time" min="1" required>
+      </div><br>
+      <div id="timer"><h2>00:00:00</h3></div><br>
+      <div id="buttons">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+      </div>
+    </div> 
+    </div>
+   
+   
+
+<script>
+const timeInput = document.getElementById("time");
+const timer = document.getElementById("timer");
+const startButton = document.getElementById("start");
+const stopButton = document.getElementById("stop");
+const resetButton = document.getElementById("reset");
+
+let intervalId;
+let startTime;
+let remainingTimeInSeconds;
+
+startButton.addEventListener("click", startTimer);
+stopButton.addEventListener("click", stopTimer);
+resetButton.addEventListener("click", resetTimer);
+
+function startTimer() {
+  const totalTimeInSeconds = parseInt(timeInput.value);
+  if (totalTimeInSeconds <= 0) {
+    alert("Please enter a valid time in seconds.");
+    return;
+  }
+  remainingTimeInSeconds = totalTimeInSeconds;
+  startTime = Date.now();
+  intervalId = setInterval(() => {
+    remainingTimeInSeconds--;
+    if (remainingTimeInSeconds <= 0) {
+      clearInterval(intervalId);
+      timer.innerHTML = "00:00:00";
+      startButton.disabled = false;
+      
+      return;
+    }
+    const hours = Math.floor(remainingTimeInSeconds / 3600);
+    const minutes = Math.floor((remainingTimeInSeconds % 3600) / 60);
+    const seconds = remainingTimeInSeconds % 60;
+    const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    timer.innerHTML = formattedTime;
+  }, 1000);
+  startButton.disabled = true;
+}
+
+function stopTimer() {
+  clearInterval(intervalId);
+  remainingTimeInSeconds -= Math.floor((Date.now() - startTime) / 1000);
+ 
+  startButton.disabled = false;
+  
+}
+
+function resetTimer() {
+  clearInterval(intervalId);
+  timer.innerHTML = "00:00:00";
+  startButton.disabled = false;
+  timeInput.value = "";
+}
+
+function pad(number) {
+  return number < 10 ? "0" + number : number;
+}
+    </script>
+
+   
+  </body>
+</html>
